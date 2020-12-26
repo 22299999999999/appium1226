@@ -33,7 +33,7 @@ class TestWework:
             "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[2]/android.widget.RelativeLayout/android.widget.ListView/android.widget.RelativeLayout[2]/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout")
         el2.click()
 
-    def test_daka(self):
+    def test_daka1(self):
         self.driver.find_element(MobileBy.XPATH, "//*[@text='工作台']").click()
         # 滚动查找元素
         self.driver.find_element(MobileBy.
