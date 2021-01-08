@@ -12,8 +12,13 @@ class App(BasePage):
             caps["platformName"] = "Android"
             caps["deviceName"] = "wework"
             caps["appPackage"] = "com.tencent.wework"
-            caps["appActivity"] = ".launch.LaunchSplashActivity"
+            # caps["appActivity"] = ".launch.LaunchSplashActivity"
+            caps["appActivity"] = ".launch.WwMainActivity"
             caps["noReset"] = "true"
+            # 执行程序时不会重新启动app
+            caps["dontStopAppOnReset"] = "true"
+            # 跳过一些安装和权限的设置
+            caps["skipDeviceInitialization"] = "true"
 
             caps["ensureWebviewsHavePages"] = True
             caps['settings[waitForIdleTimeout]'] = 0
