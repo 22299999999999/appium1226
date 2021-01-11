@@ -1,3 +1,4 @@
+import yaml
 from appium.webdriver.common.mobileby import MobileBy
 from appium.webdriver.webdriver import WebDriver
 
@@ -5,6 +6,12 @@ from test_frame.black_handle import black_wrapper
 
 
 class BasePage():
+    FIND = 'find'
+    ACTION = 'action'
+    CONTENT = 'content'
+    FIND_CLICK = "find_click"
+    FIND_SENDKEYS = "find_sendkeys"
+
     def __init__(self, driver: WebDriver = None):
         self.driver = driver
         self.black_list = [(MobileBy.XPATH, "//*[@resource-id='com.xueqiu.android:id/iv_close']")]
@@ -42,3 +49,25 @@ class BasePage():
 
     def swip_click(self, by, locator):
         self.swip(by, locator).click()
+
+    def load(self, filepath):
+        with open(filepath, encoding='utf-8') as f:
+            cfg = yaml.load(f)
+        for data in cfg:
+            elements = data.get(self.FIND)
+            ways = data.get(self.ACTION)
+            content = data.get(self.CONTENT)
+            if ways == self.FIND_CLICK:
+                self.find_click(MobileBy.XPATH, elements)
+
+            elif ways == self.FIND_SENDKEYS:
+                self.find_sendkeys(MobileBy.XPATH, elements, content)
+
+    def screenshot(self, photopath):
+        self.driver.save_screenshot(photopath)
+
+    def start_video(self):
+        self.driver.start_recording_screen()
+
+    def stop_video(self):
+        self.driver.stop_recording_screen()
