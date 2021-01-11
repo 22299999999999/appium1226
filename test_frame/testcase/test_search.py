@@ -1,10 +1,11 @@
-from test_frame.app import App
+from test_frame.basepage import BasePage
+from test_frame.page.main import MainPage
 
 
 class TestSearch():
 
     def test_search(self):
-        app = App()
-        app.start()
-        result = app.goto_main().goto_hangqing().goto_search().search()
+        basepage = BasePage()
+        app = MainPage(basepage)
+        result = app.goto_hangqing().goto_search().search()
         assert result

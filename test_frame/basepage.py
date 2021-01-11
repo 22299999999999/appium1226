@@ -1,4 +1,5 @@
 import yaml
+from appium import webdriver
 from appium.webdriver.common.mobileby import MobileBy
 from appium.webdriver.webdriver import WebDriver
 
@@ -12,8 +13,15 @@ class BasePage():
     FIND_CLICK = "find_click"
     FIND_SENDKEYS = "find_sendkeys"
 
-    def __init__(self, driver: WebDriver = None):
-        self.driver = driver
+    def __init__(self):
+        caps = {}
+        caps["platformName"] = "Android"
+        caps["deviceName"] = "127.0.0.1:7555"
+        caps["appPackage"] = "com.xueqiu.android"
+        caps["appActivity"] = ".view.WelcomeActivityAlias"
+        caps["noReset"] = "true"
+        self.driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
+        self.driver.implicitly_wait(10)
         self.black_list = [(MobileBy.XPATH, "//*[@resource-id='com.xueqiu.android:id/iv_close']")]
 
     # def find(self, by, locator):
